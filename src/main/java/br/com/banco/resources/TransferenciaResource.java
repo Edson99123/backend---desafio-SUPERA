@@ -19,6 +19,8 @@ public class TransferenciaResource {
     @Autowired
     private TransferenciaService service;
 
+    /**
+     * A sua api deve fornecer os dados de transferência de acordo com o número da conta bacária.*/
     @GetMapping
     public ResponseEntity<List<Transferencia>> findAll(){
         List<Transferencia> transferenciaLista = service.findAll();
@@ -27,9 +29,17 @@ public class TransferenciaResource {
 
     /**
      * A sua api deve fornecer os dados de transferência de acordo com o número da conta bacária.*/
-    @GetMapping(value = "/{idTransferencia}")
-    public ResponseEntity<Transferencia> findByIdConta(@PathVariable Long idTransferencia){
-        Transferencia transferencia = service.findByIdConta(idTransferencia);
-        return ResponseEntity.ok().body(transferencia);
+    @GetMapping(value = "/{contaId}")
+    public ResponseEntity<List<Transferencia>> findByIdConta(@PathVariable Long contaId){
+        List<Transferencia> transferencias = service.findByIdConta(contaId);
+        return ResponseEntity.ok().body(transferencias);
+    }
+
+    /**
+     * Caso seja informado o nome do operador da transação, retornar todas as transferências relacionados à aquele operador.*/
+    @GetMapping(value = "/tipo/{tipoOperacao}")
+    public ResponseEntity<List<Transferencia>> findTipoOperacao(@PathVariable String tipoOperacao){
+        List<Transferencia> transferencias = service.findTipoOperacao(tipoOperacao);
+        return ResponseEntity.ok().body(transferencias);
     }
 }

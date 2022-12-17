@@ -19,9 +19,11 @@ public class TransferenciaService {
         return repository.findAll();
     }
 
-    public Transferencia findByIdConta(Long idTransferencia) {
-        Optional<Transferencia> transferencia = repository.findById(idTransferencia);
-        return transferencia.get();
+    public List<Transferencia> findByIdConta(Long contaId) {
+        return repository.findByContaId(contaId);
     }
 
+    public List<Transferencia> findTipoOperacao(String tipoOperacao) {
+        return  repository.findByTipo(tipoOperacao);
+    }
 }
