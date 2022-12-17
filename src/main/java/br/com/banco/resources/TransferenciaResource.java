@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -37,9 +39,19 @@ public class TransferenciaResource {
 
     /**
      * Caso seja informado o nome do operador da transação, retornar todas as transferências relacionados à aquele operador.*/
-    @GetMapping(value = "/tipo/{tipoOperacao}")
-    public ResponseEntity<List<Transferencia>> findTipoOperacao(@PathVariable String tipoOperacao){
-        List<Transferencia> transferencias = service.findTipoOperacao(tipoOperacao);
+    @GetMapping(value = "/operador/{operadorTransacao}")
+    public ResponseEntity<List<Transferencia>> findByoperador(@PathVariable String operadorTransacao){
+        List<Transferencia> transferencias = service.findOperadorTransacao(operadorTransacao);
         return ResponseEntity.ok().body(transferencias);
     }
+    
+
+    /**
+     * por datas de inicio e fim*/
+    @GetMapping(value = "/periodo/{dataInicio},{dataFim}")
+    public ResponseEntity<List<Transferencia>> findTipoOperacao(@PathVariable LocalDateTime dataInicio, @PathVariable LocalDateTime dataFim){
+        List<Transferencia> transferencias = service.buscaPorPeiodoDeDatas(dataInicio, dataFim);
+        return ResponseEntity.ok().body(transferencias);
+    }
+
 }

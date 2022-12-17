@@ -6,6 +6,8 @@ import br.com.banco.repositories.TrasnferenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +25,11 @@ public class TransferenciaService {
         return repository.findByContaId(contaId);
     }
 
-    public List<Transferencia> findTipoOperacao(String tipoOperacao) {
-        return  repository.findByTipo(tipoOperacao);
+    public List<Transferencia> findOperadorTransacao(String operadorTransacao) {
+        return  repository.findByOperadorTransacao(operadorTransacao);
+    }
+
+    public List<Transferencia> buscaPorPeiodoDeDatas(LocalDateTime dateInicio, LocalDateTime dateFim) {
+        return  repository.buscaPorPeriodoDeDatas(dateInicio, dateFim);
     }
 }
