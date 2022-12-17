@@ -44,7 +44,7 @@ public class TransferenciaResource {
         List<Transferencia> transferencias = service.findOperadorTransacao(operadorTransacao);
         return ResponseEntity.ok().body(transferencias);
     }
-    
+
 
     /**
      * por datas de inicio e fim*/
